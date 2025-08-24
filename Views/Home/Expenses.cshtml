@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Expenses";
+}
+@model List<Expense>
+<div class="text-center">
+    <h1 class="display-4">Expenses</h1>
+    <br />
+    <hr />
+    <div class="container">
+        <div class="col-3">
+            <a class="btn btn-primary" asp-action="CreateEditExpense" asp-controller="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
+                </svg>
+                Create New Entry</a>
+        </div>
+    </div>
+    <h3>Total Expenses $@ViewBag.TotalExpense</h3>
+    <br />
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Value</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var expense in Model)
+            {
+                <tr>
+                    <td>@expense.Id</td>
+                    <td>@expense.CreatedAt.ToString("g")</td>
+                    <td>@expense.Value.ToString("C")</td>
+                    <td>@expense.description</td>
+                         <td>
+                        <a asp-action="CreateEditExpense" asp-route-id="@expense.Id" class="btn btn-sm btn-secondary">Edit</a>
+                        <a asp-action="DeleteExpense" asp-route-id="@expense.Id" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+   
+</div>
